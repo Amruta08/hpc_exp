@@ -1,0 +1,20 @@
+top
+Display real-time system statistics, such as CPU usage, memory usage, running processes, etc.
+
+ps
+Displays list of currently running processes on the system asn thier pid, amt of memory and cpu usage
+
+
+sleep 360 &
+kill pid
+Is used to terminate a running process
+
+cat /proc/cpuinfo
+Displays info. about the CPU installed on the system
+
+vmstat 
+Display info about virtual memory system of system
+provides info on amt of free memory, no. of processes waiting for I/O, amt of swap space used
+
+
+

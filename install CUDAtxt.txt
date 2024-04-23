@@ -1,0 +1,51 @@
+To install the CUDA Toolkit on Linux, you can follow these general steps. Please note that the exact commands and steps might vary depending on your Linux distribution:
+
+1. **Check CUDA-Compatible GPU**: First, ensure that you have a CUDA-compatible GPU. You can find a list of CUDA-enabled GPUs on NVIDIA's website.
+
+2. **Download CUDA Toolkit**: Visit the NVIDIA CUDA Toolkit download page and select the appropriate version for your Linux distribution. You can find the download page [here](https://developer.nvidia.com/cuda-downloads).
+
+3. **Follow Installation Instructions**: NVIDIA provides detailed installation instructions for various Linux distributions. Choose your distribution from the list and follow the instructions provided on the download page.
+
+   Typically, the installation involves running a shell script installer or using package managers like `apt` for Ubuntu-based distributions or `dnf` for Fedora-based distributions.
+
+4. **Post-Installation Steps**: After installing the CUDA Toolkit, you may need to update environment variables like `PATH` and `LD_LIBRARY_PATH` to include CUDA binaries and libraries. This allows your system to find CUDA executables and libraries when compiling and running CUDA programs.
+
+5. **Verify Installation**: Once the installation is complete, you can verify that CUDA is installed correctly by checking the CUDA Toolkit version and running sample CUDA programs provided by NVIDIA.
+
+   - To check the CUDA Toolkit version, you can run the following command in the terminal:
+     ```
+     nvcc --version
+     ```
+
+   - NVIDIA provides sample CUDA programs in the CUDA Toolkit installation directory. You can navigate to the `Samples` directory and follow the instructions in the `README` file to compile and run the samples.
+
+6. **Optional**: Install CUDA development libraries (if needed) using your package manager. These libraries include headers and other development files required for compiling CUDA programs.
+
+That's the general process for installing the CUDA Toolkit on Linux. Make sure to follow the specific instructions provided by NVIDIA for your Linux distribution to ensure a smooth installation process.
+
+--------------
+To run the CUDA code on Linux, you'll need to have the CUDA toolkit installed on your system. Assuming that CUDA is properly installed and configured, you can follow these steps to compile and run the code:
+
+1. **Save the Code**: Save the formatted code provided earlier into a file, let's say `vector_add.cu`.
+
+2. **Open Terminal**: Open a terminal window.
+
+3. **Navigate to Directory**: Use the `cd` command to navigate to the directory where your `vector_add.cu` file is located.
+
+4. **Compile the Code**: Compile the CUDA code using `nvcc`, the NVIDIA CUDA Compiler. Here's the command:
+
+   ```bash
+   nvcc -o vector_add vector_add.cu
+   ```
+
+   This command compiles the CUDA code and generates an executable named `vector_add`.
+
+5. **Run the Executable**: After successful compilation, you can run the executable by typing its name and pressing Enter:
+
+   ```bash
+   ./vector_add
+   ```
+
+   This will execute the compiled CUDA program, and you should see the output printed in the terminal.
+
+Make sure that you have the necessary permissions to compile and execute files in the directory. If not, you might need to use `sudo` before the compilation and execution commands. Additionally, ensure that the CUDA toolkit is properly installed and configured on your system.

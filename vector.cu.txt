@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+__global__ void vectorAdd(int *a, int *b, int *c, int n) {
+    int tid = blockIdx.x * blockDim.x + threadIdx.x;
+    if (tid < n) {
+        c[tid] = a[tid] + b[tid];
+    }
+}
+
+int main() {
+    int n = 100; // Size of the vectors
+    int *h_a, *h_b, *h_c; // Host vectors
+    int *d_a, *d_b, *d_c; // Device vectors
+
+    h_a = (int*)malloc(n * sizeof(int));
+    h_b = (int*)malloc(n * sizeof(int));
+    h_c = (int*)malloc(n * sizeof(int));
+
+    cudaMalloc((void**)&d_a, n * sizeof(int));
+    cudaMalloc((void**)&d_b, n * sizeof(int));
+    cudaMalloc((void**)&d_c, n * sizeof(int));
+
+    for (int i = 0; i < n; ++i) {
+        h_a[i] = i;
+        h_b[i] = i * 2;
+    }
+
+    cudaMemcpy(d_a, h_a, n * sizeof(int), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_b, h_b, n * sizeof(int), cudaMemcpyHostToDevice);
+
+    dim3 grid(ceil((float)n / 256), 1, 1);
+    dim3 block(256, 1, 1);
+
+    vectorAdd<<<grid, block>>>(d_a, d_b, d_c, n);
+
+    cudaMemcpy(h_c, d_c, n * sizeof(int), cudaMemcpyDeviceToHost);
+
+    printf("Result: ");
+    for (int i = 0; i < n; ++i) {
+        printf("%d ", h_c[i]);
+    }
+    printf("\n");
+
+    cudaFree(d_a);
+    cudaFree(d_b);
+    cudaFree(d_c);
+
+    free(h_a);
+    free(h_b);
+    free(h_c);
+
+    return 0;
+}
